@@ -1,13 +1,15 @@
-# CS359B Project (ADD NAME HERE)
+# CS359B Project - Twerify
 
-(short description here)
+A decentralized reputation market dapp for public Twitter identities. 
 
 ## Technologies used
 
-(Add only the specific technologies you need to use until Midterm)
+We plan on using:
 
-* (e.g. solidity, react, node, mysql)
+- React
+- Node
+- MongoDB
 
 ## Istallation intructions
 
-(add simple instructions on how to run the code here)
+

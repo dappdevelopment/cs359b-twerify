@@ -1,4 +1,4 @@
-var CardinalToken = artifacts.require("CardinalToken");  
+var TwerifyToken = artifacts.require("TwerifyToken");  
 module.exports = function(deployer) {
-    deployer.deploy(CardinalToken);
+    deployer.deploy(TwerifyToken);
 };

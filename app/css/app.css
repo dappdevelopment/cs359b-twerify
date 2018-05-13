@@ -1,7 +1,47 @@
 body { background-color:#F0F0F0; padding: 2em; font-family: 'Raleway','Source Sans Pro', 'Arial'; }
-.container { width: 50%; margin: 0 auto; }
-label { Display:block; Margin-bottom:10px; }
+.containerHome { 
+  width: 75%; 
+  margin: 0 auto;
+  text-align: center;
+}
+label { 
+  Display:block; 
+  Margin-bottom:10px; 
+}
+
+.pricePerToken { 
+}
+
 input { Padding:10px; width: 50%; margin-bottom: 1em; }
 button { margin: 2em 0; padding: 1em 4em; Display:block; }
 #display { padding:1em; height: 1em; background-color:#fff; margin: 1em 0; text-align: center; }
 #loader { width: 100px; display: none; }
+
+.container { 
+  width: 50%; 
+  margin: 0 auto;
+  text-align: center;
+}
+
+.containerInputPricePerToken { 
+  width: 50%; 
+  margin: 0 auto;
+  text-align: center;
+}
+
+.inputButton {
+  height: 41px;
+  width: 289px;
+  position: relative;
+  margin: 2em auto;
+}
+
+.creatorInput{
+}
+
+.generateButton {
+    height: 41px;
+    width: 50%;
+    position: relative;
+    margin: 0em auto;
+}

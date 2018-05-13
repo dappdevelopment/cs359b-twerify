@@ -10,23 +10,15 @@
       <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 
       <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-      <script type='text/javascript'>
-      $(document).ready(function(){
-          $.getJSON("https://api.twitter.com/1/statuses/oembed.json?id=992522016120025088&align=center&callback=?",
-              function(data){$('#tweet123').html(data.html);});
-      });
-      </script>
    </head>
    <body>
-      <div class="containerHome">
-        <h1>Welcome to Twerify</h1>
-        <form action="creator.html">
-          <button id="button" class="inputButton" href="creator.html">Create Personal Content Token</button>
-        </form>
-        <form action="consume.html">
-          <button id="button" class="inputButton">View Content</button>
-        </form>
-      </div>
+       <div class="container">
+         <h1>Create Personal Token</h1>
+         <div class="creatorInput">
+           <label for="amount" class="col-lg-2 control-label pricePerToken">Price Per Token</label>
+           <input id="amount" type="text">
+           <button id="generateButton" class="generateButton">Generate</button>
+         </div>
+       </div>
    </body>
 </html>

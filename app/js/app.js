@@ -52,10 +52,15 @@ function app() {
       // Else display error
       $("#tokenCreated").show();
     })
+
+    // Psuedo code for customer view
+    // If user is logged in and has a token
+      // Show image
+    // Otherwise
+      // Show button to buy token
+
 }
 $(document).ready(app);
-
-
 
 
 function transfer(to, amount) {

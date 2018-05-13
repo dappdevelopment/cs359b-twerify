@@ -8,17 +8,10 @@
       <link rel="stylesheet" type="text/css" href="css/app.css">
       <meta charset="utf-8">
       <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-
-      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-      <script type='text/javascript'>
-      $(document).ready(function(){
-          $.getJSON("https://api.twitter.com/1/statuses/oembed.json?id=992522016120025088&align=center&callback=?",
-              function(data){$('#tweet123').html(data.html);});
-      });
-      </script>
    </head>
    <body>
-      Placeholder for consumer demo
+      <div class="content" id="cryptoMeme" style="display:none">
+        <img src="cryptomeme.jpeg" alt="Crypto Meme">
+      </div>
    </body>
 </html>

@@ -15,9 +15,14 @@
        <div class="container">
          <h1>Create Personal Token</h1>
          <div class="creatorInput">
-           <label for="amount" class="col-lg-2 control-label pricePerToken">Price Per Token (ETH / token)</label>
-           <input id="amount" type="text">
+           <label for="pricePerToken" class="col-lg-2 control-label pricePerToken">Price Per Token (ETH / token)</label>
+           <input id="pricePerToken" type="text">
+           <label for="numberOfTokens" class="col-lg-2 control-label pricePerToken">Number of Tokens</label>
+           <input id="numberOfTokens" type="text">
            <button id="generateButton" class="generateButton">Generate</button>
+         </div>
+         <div class="tokenCreated" id="tokenCreated" style="display:none">
+           <h2>Tokens Minted!</h2>
          </div>
        </div>
    </body>

@@ -45,3 +45,7 @@ button { margin: 2em 0; padding: 1em 4em; Display:block; }
     position: relative;
     margin: 0em auto;
 }
+
+.tokenCreated {
+    padding: 10px;
+}

@@ -13,14 +13,41 @@
    </head>
    <body>
        <div class="container">
-         <h1>Create Personal Token</h1>
+        <h1>Create Personal Token</h1>
+      
          <div class="creatorInput">
+            <div>
+              <!-- <label for="file">Choose file to upload</label> -->
+              <!-- <input type="file" id="musicFile" name="file" accept=".mp3" onchange="readFile(this.files);"> -->
+              <input  id="audioFileChooser" type="file" onchange="readFile(this.files);">
+              <script>
+                function readFile(files) {
+                  var fileReader = new FileReader();
+                    fileReader.readAsArrayBuffer(files[0]);
+                    fileReader.onload = function(e) {
+                      playAudioFile(e.target.result);
+                      console.log(("Filename: '" + files[0].name + "'"), ( "(" + ((Math.floor(files[0].size/1024/1024*100))/100) + " MB)" ));
+                    }
+                }
+                function playAudioFile(file) {
+                  var context = new window.AudioContext();
+                    context.decodeAudioData(file, function(buffer) {
+                      var source = context.createBufferSource();
+                        source.buffer = buffer;
+                        source.loop = false;
+                        source.connect(context.destination);
+                        source.start(0); 
+                    });
+                }
+              </script>
+            </div>
            <label for="pricePerToken" class="col-lg-2 control-label pricePerToken">Price Per Token (ETH / token)</label>
            <input id="pricePerToken" type="text">
            <label for="numberOfTokens" class="col-lg-2 control-label pricePerToken">Number of Tokens</label>
            <input id="numberOfTokens" type="text">
-           <button id="generateButton" class="generateButton">Generate</button>
-         </div>
+           <button id="generateButton" class="generateButton">Create Tokens</button>
+          </div>
+
          <div class="tokenCreated" id="tokenCreated" style="display:none">
            <h2>Tokens Minted!</h2>
          </div>

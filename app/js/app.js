@@ -53,6 +53,8 @@ function app() {
       $("#tokenCreated").show();
     })
 
+
+
     // Psuedo code for customer view
     // If user is logged in and has a token
       // Show image

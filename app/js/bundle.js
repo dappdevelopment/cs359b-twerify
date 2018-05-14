@@ -97,8 +97,25 @@ function app() {
     })
 
     // TODO: Replace with call to check if user has token
-    userHasToken = false
+    
 
+    $('#checkBalance').click(function() {
+      console.log("CHECK BALANCE");
+
+      contract.methods.balanceOf(userAccount).call({'from': userAccount}, 
+        function (err, balance) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(balance);
+            $('#display').text(balance + " Tokens");
+            $('#display').show();
+          }
+        }
+      );
+    });
+
+    var userHasToken = true;
     if(userHasToken) {
       $("#song").show();
     } else {

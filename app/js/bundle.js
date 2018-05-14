@@ -78,6 +78,24 @@ function app() {
 
         contract = new web3.eth.Contract(contractData.abi, contractAddress);
       })
+      .then( function () {
+        var userHasToken = true;
+        //fire loading UI
+        contract.methods.hasValidAccess(userAccount).call({'from': userAccount}, 
+          function (err, result) {
+            if (err) {
+              console.log(err);
+            } else {
+              if(result) {
+                $("#song").show();
+              } else {
+                $("#buyToken").show();
+                //hide the loader UI
+              }
+            }
+          }
+        );
+      })
       .catch(console.error);
 
     // Must be inside of "ready" block so elements have been loaded
@@ -97,7 +115,7 @@ function app() {
     })
 
     // TODO: Replace with call to check if user has token
-    
+
 
     $('#checkBalance').click(function() {
       console.log("CHECK BALANCE");
@@ -115,12 +133,6 @@ function app() {
       );
     });
 
-    var userHasToken = true;
-    if(userHasToken) {
-      $("#song").show();
-    } else {
-      $("#buyToken").show();
-    }
 
     // Must be inside of "ready" block so elements have been loaded
     $("#purchaseToken").click(function() {

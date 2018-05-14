@@ -16,7 +16,7 @@ contract ContentToken is ERC721Token, Ownable {
   }
 
   function hasValidAccess(address _owner) public view returns (bool)  {
-    if (balanceOf(_owner) > 1) return true;
+    if (balanceOf(_owner) >= 1) return true;
     return false;
   }
 }

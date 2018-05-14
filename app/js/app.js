@@ -111,6 +111,8 @@ function app() {
       // TODO: Add call to mint new ERC721 tokens with amount and given price
       // mint(amount)
 
+
+
       // TODO if call is successful than display successful message
       // Else display error
       $("#tokenCreated").show();
@@ -127,12 +129,32 @@ function app() {
 
     // Must be inside of "ready" block so elements have been loaded
     $("#purchaseToken").click(function() {
-      console.log("TESTTTTTTT")
+      console.log("Purchasing token")
+
+      console.log(contract)
       
       // TODO: Add call to purchase new ERC 721 token and add to account
+      contract.methods.purchaseContent(1).call().then(function (err) {
+        if(err) {
+          console.log("ERROR")
+          console.log(err)
+        } else {
+          $("#tokenPurchased").show();
+        }
+       }).catch(console.error);
 
-      $("#tokenPurchased").show();
+      // https://github.com/atchai/licensetoken/blob/master/app/src/index.js
+      // contract.methods.purchaseContent({
+      //   'price': 0.1
+      //   },
+      //   function (err, transactionHash) {
+      //       console.log(err, transactionHash);
+      // });
 
+      // contract.methods.balances(web3js.eth.defaultAccount).call().then(function (result) {
+      //    $('#display').text(result + " CDT");
+      //    console.log(result);
+      // });
     })
 }
 

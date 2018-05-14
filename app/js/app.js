@@ -53,13 +53,24 @@ function app() {
       $("#tokenCreated").show();
     })
 
+    // TODO: Replace with call to check if user has token
+    userHasToken = false
 
+    if(userHasToken) {
+      $("#song").show();
+    } else {
+      $("#buyToken").show();
+    }
 
-    // Psuedo code for customer view
-    // If user is logged in and has a token
-      // Show image
-    // Otherwise
-      // Show button to buy token
+    // Must be inside of "ready" block so elements have been loaded
+    $("#purchaseToken").click(function() {
+      console.log("TESTTTTTTT")
+      
+      // TODO: Add call to purchase new ERC 721 token and add to account
+
+      $("#tokenPurchased").show();
+    })
+
 
 }
 $(document).ready(app);

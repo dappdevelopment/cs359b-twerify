@@ -53,3 +53,13 @@ button { margin: 2em 0; padding: 1em 4em; Display:block; }
 .song {
   text-align: center;
 }
+
+.buyToken { 
+  width: 80%; 
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tokenPurchased {
+    padding: 10px;
+}

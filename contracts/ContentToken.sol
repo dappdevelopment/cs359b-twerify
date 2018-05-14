@@ -1,7 +1,7 @@
 pragma solidity ^0.4.17;
 
-import import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
-import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
+import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
 contract ContentToken is ERC721Token, Ownable {
   string public constant _name = "ContentToken";
@@ -11,7 +11,7 @@ contract ContentToken is ERC721Token, Ownable {
   //token id and metadata 
 
   function purchaseContent() public payable {
-    require(msg.value == price);
+    require(msg.value == _price);
     _mint(msg.sender, totalSupply());
   }
 

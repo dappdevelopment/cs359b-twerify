@@ -142,7 +142,7 @@ function app() {
       console.log("HIT PURCHASE")
       
       contract.methods.purchaseContent().send({'from': userAccount, 
-        'value': web3.utils.toWei(0.1, 'ether')}, 
+        'value': web3.utils.toWei("0.1", 'ether')}, 
         function (err, transactionHash) { 
           if (err) {
             console.log(err, transactionHash);

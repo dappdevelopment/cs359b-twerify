@@ -54,7 +54,7 @@ function app() {
     })
 
     // TODO: Replace with call to check if user has token
-    userHasToken = false
+    userHasToken = true
 
     if(userHasToken) {
       $("#song").show();
@@ -69,9 +69,8 @@ function app() {
       // TODO: Add call to purchase new ERC 721 token and add to account
 
       $("#tokenPurchased").show();
+
     })
-
-
 }
 $(document).ready(app);
 

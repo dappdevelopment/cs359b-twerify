@@ -1,3 +1,6 @@
+#truffle builds
+build/contracts/*
+
 # Logs
 logs
 *.log

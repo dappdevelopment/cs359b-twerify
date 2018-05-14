@@ -10,8 +10,8 @@ contract ContentToken is ERC721Token, Ownable {
 
   //token id and metadata 
 
-  function purchaseContent(uint256 price) public payable {
-    require(price >= _price);
+  function purchaseContent() public payable {
+    require(msg.value >= _price);
     _mint(msg.sender, totalSupply());
   }
 

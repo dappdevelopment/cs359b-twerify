@@ -106,9 +106,14 @@ function app() {
 
     // Must be inside of "ready" block so elements have been loaded
     $("#purchaseToken").click(function() {
-      console.log("TESTTTTTTT")
+      console.log("HIT PURCHASE")
       
-      // TODO: Add call to purchase new ERC 721 token and add to account
+      contract.methods.purchaseContent().send({'from': userAccount, 
+        'value': web3.utils.toWei(0.1, 'ether')}, 
+        function (err, transactionHash) { 
+          console.log(err, transactionHash);
+      });
+
 
       $("#tokenPurchased").show();
 

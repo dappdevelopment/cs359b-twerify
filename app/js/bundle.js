@@ -78,17 +78,21 @@ function app() {
 
         contract = new web3.eth.Contract(contractData.abi, contractAddress);
       })
-      .then( function () {
+      .then(function () {
         var userHasToken = true;
+        console.log("starting checking");
         //fire loading UI
         contract.methods.hasValidAccess(userAccount).call({'from': userAccount}, 
           function (err, result) {
             if (err) {
               console.log(err);
             } else {
+              console.log(result);
               if(result) {
+                console.log("showing song");
                 $("#song").show();
               } else {
+                console.log("showing buy");
                 $("#buyToken").show();
                 //hide the loader UI
               }

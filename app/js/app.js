@@ -21,28 +21,7 @@ window.addEventListener('load', function() {
           $('#metamask-login').show();
           console.log("User is not logged in to MetaMask");
         }
-        // User is logged in to Metamask
-        else {
-          web3js.version.getNetwork((err, net_id) => {
-            console.log(net_id);
-            if (err != null) console.error("An error occurred: "+err);
-
-            // User is on the correct network
-            // Ropsten test network = 3, main net = 1
-            else if (net_id == network_id) {
-              console.log("User is logged in and on correct network");
-              $('#main-content').show();
-              startApp(web3js);
-            }
-
-            // User is not on the right network
-            else {
-              console.log("User is logged in and on WRONG network");
-              $('#metamask-network').show();
-            }
-        })
-      }
-  });
+    });
 
   // User does not have Metamask / web3 provider
   } else {
@@ -111,8 +90,6 @@ function app() {
       // TODO: Add call to mint new ERC721 tokens with amount and given price
       // mint(amount)
 
-
-
       // TODO if call is successful than display successful message
       // Else display error
       $("#tokenCreated").show();
@@ -129,32 +106,12 @@ function app() {
 
     // Must be inside of "ready" block so elements have been loaded
     $("#purchaseToken").click(function() {
-      console.log("Purchasing token")
-
-      console.log(contract)
+      console.log("TESTTTTTTT")
       
       // TODO: Add call to purchase new ERC 721 token and add to account
-      contract.methods.purchaseContent(1).call().then(function (err) {
-        if(err) {
-          console.log("ERROR")
-          console.log(err)
-        } else {
-          $("#tokenPurchased").show();
-        }
-       }).catch(console.error);
 
-      // https://github.com/atchai/licensetoken/blob/master/app/src/index.js
-      // contract.methods.purchaseContent({
-      //   'price': 0.1
-      //   },
-      //   function (err, transactionHash) {
-      //       console.log(err, transactionHash);
-      // });
+      $("#tokenPurchased").show();
 
-      // contract.methods.balances(web3js.eth.defaultAccount).call().then(function (result) {
-      //    $('#display').text(result + " CDT");
-      //    console.log(result);
-      // });
     })
 }
 

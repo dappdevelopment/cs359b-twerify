@@ -22496,28 +22496,7 @@ window.addEventListener('load', function() {
           $('#metamask-login').show();
           console.log("User is not logged in to MetaMask");
         }
-        // User is logged in to Metamask
-        else {
-          web3js.version.getNetwork((err, net_id) => {
-            console.log(net_id);
-            if (err != null) console.error("An error occurred: "+err);
-
-            // User is on the correct network
-            // Ropsten test network = 3, main net = 1
-            else if (net_id == network_id) {
-              console.log("User is logged in and on correct network");
-              $('#main-content').show();
-              startApp(web3js);
-            }
-
-            // User is not on the right network
-            else {
-              console.log("User is logged in and on WRONG network");
-              $('#metamask-network').show();
-            }
-        })
-      }
-  });
+    });
 
   // User does not have Metamask / web3 provider
   } else {

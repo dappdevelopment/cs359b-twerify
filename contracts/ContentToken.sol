@@ -1,7 +1,7 @@
 pragma solidity ^0.4.17;
 
-import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
-import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
+import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 
 contract ContentToken is ERC721Token, Ownable {
   string public constant _name = "ContentToken";

@@ -20,7 +20,10 @@
       "watchify": "latest"
     },
     "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.4",
     "lite-server": "^2.3.0",
+    "lodash.assign": "^4.2.0",
+    "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {

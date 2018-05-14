@@ -48,7 +48,7 @@ function app() {
         var networkId = results[1];
 
         // TODO: Why is results[1] always 1??? For now override it based on production vs. dev
-        networkId = 5777;
+        //networkId = 5777;
         
         var accounts = results[2];
 
@@ -111,11 +111,12 @@ function app() {
       contract.methods.purchaseContent().send({'from': userAccount, 
         'value': web3.utils.toWei(0.1, 'ether')}, 
         function (err, transactionHash) { 
-          console.log(err, transactionHash);
+          if (err) {
+            console.log(err, transactionHash);
+          } else {
+            $("#tokenPurchased").show();
+          }
       });
-
-
-      $("#tokenPurchased").show();
 
     })
 }

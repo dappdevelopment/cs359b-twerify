@@ -35,8 +35,33 @@ function app() {
        $("#loader").hide();
      });
     };
+
+    // Must be inside of "ready" block so elements have been loaded
+    $("#generateButton").click(function() {
+      console.log("TESTTTTTTT")
+      var pricePerToken = $("#pricePerToken").val();
+      var numberOfTokens = $("#numberOfTokens").val();
+      console.log("Price = " + pricePerToken)
+      console.log("Number of Tokens = " + numberOfTokens)
+
+      // TODO: Add call to mint new ERC721 tokens with amount and given price
+      // mint(amount)
+
+
+      // TODO if call is successful than display successful message
+      // Else display error
+      $("#tokenCreated").show();
+    })
+
+    // Psuedo code for customer view
+    // If user is logged in and has a token
+      // Show image
+    // Otherwise
+      // Show button to buy token
+
 }
 $(document).ready(app);
+
 
 function transfer(to, amount) {
   console.log(to, amount)
@@ -70,7 +95,4 @@ function mint(amount) {
     });
 }
 
-$("#mint-button").click(function() {
-  var amount = $("#amount".val());
-  mint(amount)
-})
+

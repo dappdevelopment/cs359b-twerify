@@ -16,7 +16,7 @@ function app() {
         var networkId = results[1];
 
         // TODO: Why is results[1] always 1???
-        networkId = 2
+        networkId = 5777
         var accounts = results[2];
         userAccount = accounts[0];
 

@@ -14,8 +14,6 @@ contract TicketBase {
 
 	mapping (uint256 => address) public ticketIndexToOwner;
 
-	mapping (uint256 => creator) public ticketIndexToCreator;
-
 	mapping (string => uint256) public hostUrlToNumCreatorOwned; 
 
 	mapping (address => uint256) ownershipTokenCount;

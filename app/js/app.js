@@ -81,7 +81,10 @@ function app() {
         var userHasToken = true;
         console.log("starting checking");
         //fire loading UI
-        contract.methods.hasValidAccess(userAccount).call({'from': userAccount}, 
+
+        hostURL = "youtube.com";
+
+        contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
           function (err, result) {
             if (err) {
               console.log(err);
@@ -148,10 +151,14 @@ function app() {
 
     // Must be inside of "ready" block so elements have been loaded
     $("#purchaseToken").click(function() {
-      console.log("HIT PURCHASE")
+      console.log("PURCHASE")
+
+      var hostURL = "youtube.com"
+
+      // TODO: Need some way to handle price and url
       
-      contract.methods.purchaseContent().send({'from': userAccount, 
-        'value': web3.utils.toWei("0.1", 'ether')}, 
+      contract.methods.purchaseTicket(hostURL).send({'from': userAccount, 
+        'value': web3.utils.toWei("10", 'ether')}, 
         function (err, transactionHash) { 
           if (err) {
             console.log(err, transactionHash);

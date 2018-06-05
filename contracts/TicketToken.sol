@@ -1,11 +1,10 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.23;
 
 import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
-contract TicketToken is ERC721Token, Ownable {
-  string public constant _name = "TicketToken";
-  string public constant _symbol = "TIK";
+contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
+  
 
   struct Ticket {
     address creator;
@@ -18,6 +17,11 @@ contract TicketToken is ERC721Token, Ownable {
   mapping (string => address) hostURLToCreator;
   mapping (string => uint256) hostURLToNumLeft;
   mapping (string => uint256) hostURLToPrice;
+
+  /**
+   * @dev Constructor function
+   */
+  constructor() public {}
 
 
   function getTicket(uint256 _ticketId) public view returns (address creator, string hostURL, uint256 price) {

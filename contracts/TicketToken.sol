@@ -8,9 +8,9 @@ contract TicketToken is ERC721Token, Ownable {
   string public constant _symbol = "TIK";
 
   struct Ticket {
-    address creator,
-    string hostURL,
-    uint256 price,
+    address creator;
+    string hostURL;
+    uint256 price;
   }
 
   Ticket[] tickets;
@@ -19,11 +19,6 @@ contract TicketToken is ERC721Token, Ownable {
   mapping (string => uint256) hostURLToNumLeft;
   mapping (string => uint256) hostURLToPrice;
 
-
-  //mapping from hostURL to creator owned tickets 
-  mapping (string => uint256[]) hostURLToCreatorOwnedTickets;
-
-  mapping (string => address) hostURLToCreator;
 
   function getTicket(uint256 _ticketId) public view returns (address creator, string hostURL, uint256 price) {
     Ticket memory _ticket = tickets[_ticketId];

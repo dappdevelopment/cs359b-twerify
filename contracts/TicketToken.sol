@@ -32,9 +32,9 @@ contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
     price = _ticket.price;
   }
 
-  function generate(address _creator, string _hostURL, uint256 _price, uint256 _count) public returns (address creator, uint256 numLeft, uint256 price) {
+  function generate(address _creator, string _hostURL, uint256 _price, uint256 _count) public returns (bool) {
     require(_count >= 1 && _count <= 100);
-    if (hostURLToCreator[_hostURL] == address(0)) {
+    if (hostURLToCreator[_hostURL] != address(0x0)) {
       require(hostURLToCreator[_hostURL] == msg.sender);
       hostURLToNumLeft[_hostURL] += _count;
       hostURLToPrice[_hostURL] = _price;
@@ -44,9 +44,7 @@ contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
       hostURLToPrice[_hostURL] = _price;
     }
 
-    creator = hostURLToCreator[_hostURL];
-    numLeft = hostURLToNumLeft[_hostURL];
-    price = hostURLToPrice[_hostURL];
+    return true;
   }
 
   function hasValidAccess(address _viewer, string _hostURL) public view returns (bool)  {

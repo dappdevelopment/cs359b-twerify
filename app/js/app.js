@@ -114,20 +114,16 @@ function app() {
       console.log(userAccount);
 
       contract.methods.generate(userAccount, hostURL, pricePerToken, numberOfTokens).send({'from': userAccount}, 
-        function (err, bool) {
+        function (err, transactionHash) {
           if (err) {
             console.log(err);
           } else {
             console.log("Success");
-            console.log(bool);
+            console.log(transactionHash);
+            $("#tokenCreated").show();
           }
         }
       );
-
-        $("#tokenCreated").show();
-
-      // TODO if call is successful than display successful message
-      // Else display error
     })
 
     // TODO: Replace with call to check if user has token

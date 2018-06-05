@@ -39,7 +39,7 @@ function app() {
     var contract;
     var userAccount;
   
-    var contractDataPromise = $.getJSON('ContentToken.json');
+    var contractDataPromise = $.getJSON('TicketToken.json');
     var networkIdPromise = web3.eth.net.getId(); // resolves on the current network id
     var accountsPromise = web3.eth.getAccounts(); // resolves on an array of accounts
   
@@ -49,7 +49,7 @@ function app() {
         var networkId = results[1];
 
         // TODO: Why is results[1] always 1??? For now override it based on production vs. dev
-        //networkId = 5777;
+        networkId = 5777;
         
         var accounts = results[2];
 
@@ -111,7 +111,15 @@ function app() {
       console.log("Number of Tokens = " + numberOfTokens)
 
       // TODO: Add call to mint new ERC721 tokens with amount and given price
-      // mint(amount)
+      hostURL = 'youtube.com'
+      console.log(userAccount);
+      contract.methods.generate(userAccount, hostURL, pricePerToken, numberOfTokens).call({'from': userAccount})
+        .then(function(creator, numLeft, price) {
+          console.log(creator);
+          console.log(numLeft);
+          console.log(price);
+        })
+        .catch(console.error);
 
       // TODO if call is successful than display successful message
       // Else display error

@@ -1,7 +1,7 @@
 pragma solidity ^0.4.17;
 
-import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
-import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
+import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
 contract TicketToken is ERC721Token, Ownable {
   string public constant _name = "TicketToken";
@@ -30,7 +30,7 @@ contract TicketToken is ERC721Token, Ownable {
 
   function generate(address _creator, string _hostURL, uint256 _price, uint256 _count) public {
     require(_count >= 1 && _count <= 100);
-    if (hostURLToCreator[_hostURL]) {
+    if (hostURLToCreator[_hostURL] == address(0x0)) {
       require(hostURLToCreator[_hostURL] == msg.sender);
       hostURLToNumLeft[_hostURL] += _count;
       hostURLToPrice[_hostURL] = _price;
@@ -52,7 +52,7 @@ contract TicketToken is ERC721Token, Ownable {
       for (uint256 i = 0; i < _ownedTickets.length; i++) {
         uint256 _ticketId = _ownedTickets[i];
         Ticket memory _ticket = tickets[_ticketId];
-        if (_ticket.hostURL == _hostURL) return true;
+        if (compareStrings(_ticket.hostURL,_hostURL)) return true;
       }
 
       return false;
@@ -73,5 +73,9 @@ contract TicketToken is ERC721Token, Ownable {
     
       _creator.transfer(msg.value);
     }
+  }
+
+  function compareStrings (string a, string b) view returns (bool){
+    return keccak256(a) == keccak256(b);
   }
 }

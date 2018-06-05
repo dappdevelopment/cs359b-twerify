@@ -32,7 +32,7 @@ contract TicketToken is ERC721Token, Ownable {
     require(_count >= 1 && _count <= 100);
     if (hostURLToCreator[_hostURL]) {
       require(hostURLToCreator[_hostURL] == msg.sender);
-      hostURLToNumLeft[_hostURL] += _count
+      hostURLToNumLeft[_hostURL] += _count;
       hostURLToPrice[_hostURL] = _price;
     } else {
       hostURLToCreator[_hostURL] = _creator;
@@ -51,7 +51,7 @@ contract TicketToken is ERC721Token, Ownable {
 
       for (uint256 i = 0; i < _ownedTickets.length; i++) {
         uint256 _ticketId = _ownedTickets[i];
-        Ticket memory _ticket = tickets[_ticketId]
+        Ticket memory _ticket = tickets[_ticketId];
         if (_ticket.hostURL == _hostURL) return true;
       }
 
@@ -65,14 +65,13 @@ contract TicketToken is ERC721Token, Ownable {
       uint256 _price = hostURLToPrice[_hostURL];
       require(msg.value >= _price);
 
-      Ticket memory _ticket = Ticket({creator: _creator, hostURL: _hostURL, price: _price})
+      Ticket memory _ticket = Ticket({creator: _creator, hostURL: _hostURL, price: _price});
       uint256 _ticketId = tickets.push(_ticket) - 1;
 
       _mint(msg.sender, _ticketId);
-      hostURLToNumLeft[_hostURL]--
+      hostURLToNumLeft[_hostURL]--;
     
-      _creator.transfer(msg.value)
+      _creator.transfer(msg.value);
     }
   }
-
 }

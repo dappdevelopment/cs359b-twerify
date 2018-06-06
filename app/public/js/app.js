@@ -77,15 +77,15 @@ function app() {
         // TODO: Check for element that only exists on page
         if (window.location.href.indexOf("audiofile") > -1) {
           // Check permissions
-          if (checkValidAccess(/[^/]*$/.exec(window.location.href)[0])) {
-            console.log("Has access. Showing song.")
-
-            $("#song").show()
-
-          } else {
-            console.log("No access. Showing buy.")
-            $("#purchase").show()
-          }
+          checkValidAccess(/[^/]*$/.exec(window.location.href)[0]).then(function(result) {
+            if (result) {
+              console.log("Has access. Showing song.")
+              $("#song").show()
+            } else {
+              console.log("No access. Showing buy.")
+              $("#purchase").show()
+            }
+          }).catch(console.err);
         }
       })
       .catch(console.error);
@@ -124,29 +124,12 @@ function app() {
     }
 
     function checkValidAccess(hostURL) {
-        contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
+        return contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
           function (err, result) {
             if (err) {
               console.log(err);
             } else {
               console.log(result);
-              if(result) {
-                //TODO ASK THE SERVER THE PLAY PAGE
-                console.log("showing song");
-
-                $.get(path + 'listen/' + hostURL, console.log).then(
-                  function (htmlResponse) {
-                    // $("html").html(htmlResponse);
-                  });
-
-              } else {
-                //ASK TEH SERVER FOR THE BUY PAGE
-                fetch('/t/' + hostURL, function(err, success) {
-                  if (err) throw err;
-                  console.log("hit here");
-                  console.log(success);
-                });
-              }
             }
           }
         );
@@ -174,15 +157,15 @@ function app() {
       console.log(price);
       console.log(hostURL)
 
-      purchase("audiofile-1528312918138.mp3", "1");
+      purchase("audiofile-1528318907703.mp3", "1");
       //purchase(hostURL, price);
     })
 
     /*
-    songs = document.getElementsByClassName('song-box');
-    for (var i = 0; i < songs.length; i++) {
-      songs[i].addEventListener('click', checkAccess, false);
-    }
+     songs = document.getElementsByClassName('song-box');
+     for (var i = 0; i < songs.length; i++) {
+       songs[i].addEventListener('click', checkAccess, false);
+     }
     */
 }
 

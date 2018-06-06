@@ -74,7 +74,7 @@ function app() {
 
         contract = new web3.eth.Contract(contractData.abi, contractAddress);
       }).then(function() {
-        // Check for element that only exists on page
+        // TODO: Check for element that only exists on page
         if (window.location.href.indexOf("audiofile") > -1) {
           // Check permissions
           if (checkValidAccess(/[^/]*$/.exec(window.location.href)[0])) {
@@ -89,8 +89,6 @@ function app() {
         }
       })
       .catch(console.error);
-
-
 
 
     // Must be inside of "ready" block so elements have been loaded
@@ -115,7 +113,7 @@ function app() {
 
     function purchase(hostURL, price) {
       contract.methods.purchaseTicket(hostURL).send({'from': userAccount, 
-        'value': web3.utils.toWei(str(price), 'ether')}, 
+        'value': web3.utils.toWei(price, 'ether')}, 
         function (err, transactionHash) { 
           if (err) {
             console.log(err, transactionHash);
@@ -168,9 +166,16 @@ function app() {
     });
 
     $("#purchase_button").click(function() {
-      var price = $('h2[name=price]').val() //grab the price from an element;
-      var hostURL = $('h2[name=hostURL]').val() //grab the hostURL from an element
 
+      console.log("PURCHASINGGGGGG")
+
+      var price = $("#test1").val() //grab the price from an element;
+      var hostURL = $("#test2").val() //grab the hostURL from an element
+
+      console.log(price);
+      console.log(hostURL)
+
+      // purchase("audiofile-1528286138548.mp3", "10");
       purchase(hostURL, price);
     })
 

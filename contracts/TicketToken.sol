@@ -54,6 +54,9 @@ contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
     if (_ticketCount == 0) {
       return false;
     } else {
+      address creator = hostURLToCreator[_hostURL];
+      if (_viewer == creator) return true;
+
       uint256[] _ownedTickets = ownedTokens[_viewer];
 
       for (uint256 i = 0; i < _ownedTickets.length; i++) {

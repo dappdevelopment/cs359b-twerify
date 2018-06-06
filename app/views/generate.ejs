@@ -3,6 +3,9 @@
       <title>Create Token</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://dapps.stanford.edu/web3/web3-1.0.0-beta.34.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="/js/bundle.js"></script>
       <link rel="stylesheet" href="/css/app.css">
    </head>
@@ -10,20 +13,30 @@
 
        <% include metamask.ejs %>
        <div class="container">
+        <div class="title">
         <h1>Create Exclusive Digital Tickets</h1>
+        </div>
       
         <div class="creatorInput">
           <form id="uploadForm" action='/generate' method="POST" enctype="multipart/form-data" >
-            <input type="file" name="audiofile" required>
-            <label for="name">Song Name</label>
-            <input name="name" type="text">
-            <label for="price">Ticket Price (ETH)</label>
-            <input name="price" type="text">
-            <label for="numTickets">Total Tickets</label>
-            <input name="numTickets" type="text">
+            <div class="file-upload">
+              <input type="file" name="audiofile" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Song Name</label>
+              <input name="name" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="price">Ticket Price (ETH)</label>
+              <input name="price" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="numTickets">Total Tickets</label>
+              <input name="numTickets" type="text" class="form-control">
+            </div>
             <!-- <button id="generateButton" class="generateButton">Create Tokens</button> -->
           </form>
-          <button id="generate_button">Create Tickets</button>
+          <button id="generate_button" class="btn btn-default">Create Tickets</button>
         </div>
 
          <div class="tokenCreated" id="tokenCreated" style="display:none">

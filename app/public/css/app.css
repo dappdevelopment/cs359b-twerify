@@ -57,6 +57,16 @@ a {
   color: white;
 }
 
+.container {
+  color: black;
+  margin: 0 auto;
+  width: 50%;
+
+}
+
+.title {
+  padding-bottom: 50px;
+}
 
 .fab {
    width: 70px;

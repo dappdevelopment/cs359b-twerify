@@ -31,7 +31,7 @@ MongoClient.connect('mongodb://client:tickett0ken@ds247670.mlab.com:47670/tiktok
 });
 
 var storage = multer.diskStorage({
-  destination: './uploads',
+  destination: './app/uploads',
   filename: function(req, file, callback) {
     console.log(file)
     callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -120,8 +120,6 @@ app.get('/buy/:trackid', (req, res) => {
     console.log(result);
     res.render('purchase.ejs', {song: result});
   });
-
-  
 
 });
 

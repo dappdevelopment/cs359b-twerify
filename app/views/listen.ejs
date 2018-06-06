@@ -1,6 +1,6 @@
 <html>
   <head>
-      <title>Your Music</title>
+      <title>Listen</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://dapps.stanford.edu/web3/web3-1.0.0-beta.34.min.js"></script>
       <script src="js/bundle.js"></script>
@@ -10,10 +10,10 @@
        <% include metamask.ejs %>
        <div class="container">
       
-        <h1>Your Music</h1>
-        <h2> <%= song.name%>" </h2>
-        <audio controls>
-          <source src="<%= song.filename%>" type="audio/mpeg">
+        <h1>Listen</h1>
+        <h2> <%= song.name%> </h2>
+        <audio controls controlsList="nodownload">
+          <source src="../uploads/<%= song.filename%>" type="audio/mpeg">
         </audio>
 
         <button action="/view" method="GET">Home</button>

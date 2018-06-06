@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Ticket Tokens</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://dapps.stanford.edu/web3/web3-1.0.0-beta.34.min.js"></script>
+    <script src="js/bundle.js"></script>
 </head>
 <body>
+	<% include metamask.ejs %>
 	<div id="song-list">
 		<% for (var i=0; i < songs.length; i++) { %>
 			<div class="song-box" id="<%= songs[i].filename%>" >

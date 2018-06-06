@@ -12,6 +12,8 @@
       <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> -->
    </head>
    <body>
+
+       <% include metamask.ejs %>
        <div class="container">
         <h1>Create Personal Token</h1>
       
@@ -25,8 +27,8 @@
             <label for="numTickets">Total Tickets</label>
             <input name="numTickets" type="text">
             <!-- <button id="generateButton" class="generateButton">Create Tokens</button> -->
-            <button>Create Tickets</button>
           </form>
+          <button id="generate_button">Create Tickets</button>
         </div>
 
          <div class="tokenCreated" id="tokenCreated" style="display:none">

@@ -118,11 +118,11 @@ function app() {
               if(result) {
                 //TODO ASK THE SERVER THE PLAY PAGE
                 console.log("showing song");
-                $("#song").show();
+                $.get(path + 'listen/' + hostURL, console.log);
               } else {
                 //ASK TEH SERVER FOR THE BUY PAGE
                 console.log("showing buy");
-                $("#buyToken").show();
+                $.get(path + 'buy/' + hostURL, console.log);
                 //hide the loader UI
               }
             }

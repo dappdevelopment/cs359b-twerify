@@ -91,19 +91,27 @@ app.get('/generate', (req, res) => {
   res.render('generate')
 })
 
-/*
-app.post('/generate', function(req, res) {
-  var upload = multer({
-    storage: storage
-  }).single('userFile')
-  upload(req, res, function(err) {
-    res.end('File is uploaded')
-  })
-})
-*/
-
 /* Get Track */
-app.get('/:trackid', (req, res) => {
+app.get('/listen/:trackid', (req, res) => {
   //render a page with the right track to listen
-})
+  //maybe look up from 
+  var query = {
+    $filename: req.body.trackid;
+  }
+
+  var song = db.collection("songs").findOne(query);
+
+  res.render('listen.ejs', {song: song});
+});
+
+app.get('/buy/:trackid', (req, res) => {
+  var query = {
+    $filename: req.body.trackid;
+  }
+
+  var song = db.collection("songs").findOne(query);
+
+  res.render('purchase.ejs', {song: song});
+
+});
 

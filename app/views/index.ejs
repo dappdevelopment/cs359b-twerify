@@ -5,22 +5,30 @@
 	<title>Ticket Tokens</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://dapps.stanford.edu/web3/web3-1.0.0-beta.34.min.js"></script>
-    <script src="js/bundle.js"></script>
+    <script src="/js/bundle.js"></script>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 	<% include metamask.ejs %>
 	<div id="song-list">
 		<% for (var i=0; i < songs.length; i++) { %>
-
-	    <div class="song-box" id="<%= songs[i].filename%>" >
-				<div><%= songs[i].name %></div>
-				<div><%= songs[i].price %></div>
-				<div><%= songs[i].numTickets %></div>
+	    	<div class="song-box" id="<%= songs[i].filename%>" >
+	    		<div class="content">
+	    			<div class="table">
+	    				<div class="table-cell">
+	    					<ul>
+		    					<li><%= songs[i].name %></li>
+								<li><%= songs[i].price %></li>
+								<li><%= songs[i].numTickets %></li>
+	    					</ul>
+	    					<form action="/t/<%= songs[i].filename%>">
+    							<input type="submit" value="Listen" />
+							</form>
+	    				</div>
+					</div>
+				</div>
+				
 			</div>
-
-			<form action="/<%= songs[i].filename%>">
-	    	<input type="submit" value="Listen" />
-			</form>
 		<% } %>
 	</div>
 	<div id="floating-action-button">

@@ -2,8 +2,8 @@ var browserify = require('browserify'),
     watchify = require('watchify'),
     gulp = require('gulp'),
     source = require('vinyl-source-stream'),
-    sourceFile = './app/js/app.js',
-    destFolder = './app/js/',
+    sourceFile = './app/public/js/app.js',
+    destFolder = './app/public/js/',
     destFile = 'bundle.js';
 
 gulp.task('browserify', function() {

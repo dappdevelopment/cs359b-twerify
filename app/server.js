@@ -16,6 +16,10 @@ app.set('views', path.join(__dirname, '/views'))
 // Body handler middleware
 app.use(bodyParser.urlencoded({extended: true}))
 
+// Set base directory as directory for static content so express can find bundle
+// Ex. <script src="js/bundle.js"></script>
+app.use('/', express.static(__dirname + '/'));
+
 //Connect Mongo Driver to MongoDB
 let db;
 MongoClient.connect('mongodb://client:tickett0ken@ds247670.mlab.com:47670/tiktokclientdb', (err, client) => {

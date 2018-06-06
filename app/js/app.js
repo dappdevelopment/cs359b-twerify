@@ -73,8 +73,25 @@ function app() {
         console.log("contractAddress = " + contractAddress)
 
         contract = new web3.eth.Contract(contractData.abi, contractAddress);
+      }).then(function() {
+        // Check for element that only exists on page
+        if (window.location.href.indexOf("audiofile") > -1) {
+          // Check permissions
+          if (checkValidAccess(/[^/]*$/.exec(window.location.href)[0])) {
+            console.log("Has access. Showing song.")
+
+            $("#song").show()
+
+          } else {
+            console.log("No access. Showing buy.")
+            $("#purchase").show()
+          }
+        }
       })
       .catch(console.error);
+
+
+
 
     // Must be inside of "ready" block so elements have been loaded
     function generate(name, price, numTokens) {
@@ -121,7 +138,7 @@ function app() {
 
                 $.get(path + 'listen/' + hostURL, console.log).then(
                   function (htmlResponse) {
-                    $("html").html(htmlResponse);
+                    // $("html").html(htmlResponse);
                   });
 
               } else {
@@ -130,7 +147,7 @@ function app() {
 
                 $.get(path + 'buy/' + hostURL, console.log).then(
                   function (htmlResponse) {
-                    $("html").html(htmlResponse);
+                    // $("html").html(htmlResponse);
                   });
               }
             }
@@ -162,6 +179,7 @@ function app() {
       songs[i].addEventListener('click', checkAccess, false);
     }
 }
+
 
 $(document).ready(app);
 

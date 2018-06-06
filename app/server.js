@@ -96,7 +96,7 @@ app.get('/generate', (req, res) => {
 })
 
 /* Get Track */
-app.get('/listen/:trackid', (req, res) => {
+app.get('/:trackid', (req, res) => {
   //render a page with the right track to listen
   //maybe look up from 
   var query = {
@@ -110,16 +110,16 @@ app.get('/listen/:trackid', (req, res) => {
   });
 });
 
-app.get('/buy/:trackid', (req, res) => {
-  var query = {
-    filename: req.params.trackid,
-  }
+// app.get('/buy/:trackid', (req, res) => {
+//   var query = {
+//     filename: req.params.trackid,
+//   }
 
-  var song = db.collection("songs").findOne(query, function(err, result) {
-    if (err) throw err;
-    console.log(result);
-    res.render('purchase.ejs', {song: result});
-  });
+//   var song = db.collection("songs").findOne(query, function(err, result) {
+//     if (err) throw err;
+//     console.log(result);
+//     res.render('purchase.ejs', {song: result});
+// //   });
 
-});
+// });
 

@@ -11,11 +11,16 @@
 	<% include metamask.ejs %>
 	<div id="song-list">
 		<% for (var i=0; i < songs.length; i++) { %>
-			<div class="song-box" id="<%= songs[i].filename%>" >
+
+	    <div class="song-box" id="<%= songs[i].filename%>" >
 				<div><%= songs[i].name %></div>
 				<div><%= songs[i].price %></div>
 				<div><%= songs[i].numTickets %></div>
 			</div>
+
+			<form action="/<%= songs[i].filename%>">
+	    	<input type="submit" value="Listen" />
+			</form>
 		<% } %>
 	</div>
 	<div id="floating-action-button">

@@ -49,39 +49,68 @@ contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
   }
 
   function hasValidAccess(address _viewer, string _hostURL) public view returns (bool)  {
+
+    //return true;
+
+
     uint256 _ticketCount = balanceOf(_viewer);
 
-    if (_ticketCount == 0) {
-      return false;
-    } else {
-      address creator = hostURLToCreator[_hostURL];
-      if (_viewer == creator) return true;
+    if (_ticketCount > 0) return true;
 
-      uint256[] _ownedTickets = ownedTokens[_viewer];
+    address creator = hostURLToCreator[_hostURL];
+    if (_viewer == creator) return true;
 
-      for (uint256 i = 0; i < _ownedTickets.length; i++) {
-        uint256 _ticketId = _ownedTickets[i];
-        Ticket memory _ticket = tickets[_ticketId];
-        if (compareStrings(_ticket.hostURL,_hostURL)) return true;
-      }
+    return false;
 
-      return false;
-    }
+    //////////////////
+
+    // uint256 _ticketCount = balanceOf(_viewer);
+
+    // if (_ticketCount == 0) {
+    //   return false;
+    // } else {
+    //   address creator = hostURLToCreator[_hostURL];
+    //   if (_viewer == creator) return true;
+
+    //   uint256[] _ownedTickets = ownedTokens[_viewer];
+
+    //   for (uint256 i = 0; i < _ownedTickets.length; i++) {
+    //     uint256 _ticketId = _ownedTickets[i];
+    //     Ticket memory _ticket = tickets[_ticketId];
+    //     if (compareStrings(_ticket.hostURL,_hostURL)) return true;
+    //   }
+
+    //   return false;
+    // }
   }
 
   function purchaseTicket(string _hostURL) public payable {
-    if (hostURLToNumLeft[_hostURL] > 0) {
-      address _creator = hostURLToCreator[_hostURL];
-      uint256 _price = hostURLToPrice[_hostURL];
 
-      Ticket memory _ticket = Ticket({creator: _creator, hostURL: _hostURL, price: _price});
-      uint256 _ticketId = tickets.push(_ticket) - 1;
+    address _creator = hostURLToCreator[_hostURL];
+    uint256 _price = hostURLToPrice[_hostURL];
+    //require(msg.value >= _price);
 
-      _mint(msg.sender, _ticketId);
-      hostURLToNumLeft[_hostURL]--;
+    Ticket memory _ticket = Ticket({creator: _creator, hostURL: _hostURL, price: _price});
+    uint256 _ticketId = tickets.push(_ticket) - 1;
+
+    _mint(msg.sender, _ticketId);
+    hostURLToNumLeft[_hostURL]--;
+  
+    _creator.transfer(msg.value);
+
+    // if (hostURLToNumLeft[_hostURL] > 0) {
+    //   address _creator = hostURLToCreator[_hostURL];
+    //   uint256 _price = hostURLToPrice[_hostURL];
+    //   //require(msg.value >= _price);
+
+    //   Ticket memory _ticket = Ticket({creator: _creator, hostURL: _hostURL, price: _price});
+    //   uint256 _ticketId = tickets.push(_ticket) - 1;
+
+    //   _mint(msg.sender, _ticketId);
+    //   hostURLToNumLeft[_hostURL]--;
     
-      _creator.transfer(msg.value);
-    }
+    //   _creator.transfer(msg.value);
+    // }
   }
 
   function compareStrings (string a, string b) view returns (bool){

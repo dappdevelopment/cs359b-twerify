@@ -37,7 +37,7 @@ function app() {
     var isLocal = true;
     var path = "https://dapps.stanford.edu/twerify/"; //TODO FIX PATH
     if (isLocal) {
-      path = "localhost:3000/"
+      path = "http://localhost:3000/"
     }
 
     Promise.all([contractDataPromise, networkIdPromise, accountsPromise])
@@ -118,12 +118,20 @@ function app() {
               if(result) {
                 //TODO ASK THE SERVER THE PLAY PAGE
                 console.log("showing song");
-                window.location.href = path + 'listen/' + hostURL;
+
+                $.get(path + 'listen/' + hostURL, console.log).then(
+                  function (htmlResponse) {
+                    $("html").html(htmlResponse);
+                  });
+
               } else {
                 //ASK TEH SERVER FOR THE BUY PAGE
                 console.log("showing buy");
-                window.location.href = path + 'buy/' + hostURL;
-                //hide the loader UI
+
+                $.get(path + 'buy/' + hostURL, console.log).then(
+                  function (htmlResponse) {
+                    $("html").html(htmlResponse);
+                  });
               }
             }
           }

@@ -41,14 +41,23 @@ function app() {
     var contractDataPromise = $.getJSON('TicketToken.json');
     var networkIdPromise = web3.eth.net.getId(); // resolves on the current network id
     var accountsPromise = web3.eth.getAccounts(); // resolves on an array of accounts
-  
+    var isLocal = true;
+    var path = "https://dapps.stanford.edu/twerify/"; //TODO FIX PATH
+    if (isLocal) {
+      path = "https://localhost:3000/tickets/"
+    }
+
+    $.get(path + "view", function(data) {
+      //TODO render HTML for each song with the right link
+    })
+
     Promise.all([contractDataPromise, networkIdPromise, accountsPromise])
       .then(function initApp(results) {
         var contractData = results[0];
         var networkId = results[1];
 
         // TODO: Why is results[1] always 1??? For now override it based on production vs. dev
-        networkId = 5777;
+        //networkId = 5777;
         
         var accounts = results[2];
 

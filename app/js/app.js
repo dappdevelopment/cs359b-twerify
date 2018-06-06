@@ -153,7 +153,6 @@ function app() {
     for (var i = 0; i < songs.length; i++) {
       songs[i].addEventListener('click', checkAccess, false);
     }
-
 }
 
 $(document).ready(app);

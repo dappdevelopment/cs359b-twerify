@@ -96,7 +96,7 @@ app.get('/listen/:trackid', (req, res) => {
   //render a page with the right track to listen
   //maybe look up from 
   var query = {
-    $filename: req.body.trackid;
+    $filename: req.body.trackid,
   }
 
   var song = db.collection("songs").findOne(query);
@@ -106,7 +106,7 @@ app.get('/listen/:trackid', (req, res) => {
 
 app.get('/buy/:trackid', (req, res) => {
   var query = {
-    $filename: req.body.trackid;
+    $filename: req.body.trackid,
   }
 
   var song = db.collection("songs").findOne(query);

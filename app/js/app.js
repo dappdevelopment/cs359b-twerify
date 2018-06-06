@@ -1,12 +1,5 @@
 var Web3 = require('web3');
 
-// production vs. dev
-if (window.location.hostname == '') {
-  network_id = 3;
-} else {
-  network_id = 5777 // ganache - ethereum network ID
-}
-
 // Check for Metamask and show/hide appropriate warnings.
 window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -44,12 +37,8 @@ function app() {
     var isLocal = true;
     var path = "https://dapps.stanford.edu/twerify/"; //TODO FIX PATH
     if (isLocal) {
-      path = "https://localhost:3000/tickets/"
+      path = "https://localhost:3000/"
     }
-
-    $.get(path + "view", function(data) {
-      //TODO render HTML for each song with the right link
-    })
 
     Promise.all([contractDataPromise, networkIdPromise, accountsPromise])
       .then(function initApp(results) {
@@ -66,7 +55,6 @@ function app() {
           $('#metamask-login').show();
           console.log("User not logged into MetaMask");
         }
-
 
         userAccount = accounts[0];
 
@@ -86,88 +74,31 @@ function app() {
 
         contract = new web3.eth.Contract(contractData.abi, contractAddress);
       })
-      .then(function () {
-        var userHasToken = true;
-        console.log("starting checking");
-        //fire loading UI
-
-        hostURL = "youtube.com";
-
-        contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
-          function (err, result) {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log(result);
-              if(result) {
-                console.log("showing song");
-                $("#song").show();
-              } else {
-                console.log("showing buy");
-                $("#buyToken").show();
-                //hide the loader UI
-              }
-            }
-          }
-        );
-      })
       .catch(console.error);
 
     // Must be inside of "ready" block so elements have been loaded
-    $("#generateButton").click(function() {
-      console.log("TESTTTTTTT")
-      var pricePerToken = $("#pricePerToken").val();
-      var numberOfTokens = $("#numberOfTokens").val();
-      console.log("Price = " + pricePerToken)
-      console.log("Number of Tokens = " + numberOfTokens)
+    function generate(name, price, numTokens) {
+      console.log("Price = " + price)
+      console.log("Number of Tokens = " + numTokens)
 
-      // TODO: Add call to mint new ERC721 tokens with amount and given price
-      hostURL = 'youtube.com'
+      hostURL = name;
       console.log(userAccount);
 
-      contract.methods.generate(userAccount, hostURL, pricePerToken, numberOfTokens).send({'from': userAccount}, 
+      contract.methods.generate(userAccount, hostURL, price, numTokens).send({'from': userAccount}, 
         function (err, transactionHash) {
           if (err) {
             console.log(err);
           } else {
-            console.log("Success");
-            console.log(transactionHash);
-            $("#tokenCreated").show();
+            //TEST THIS
+            document.getElementById("uploadForm").submit();
           }
         }
       );
-    })
+    }
 
-    // TODO: Replace with call to check if user has token
-
-
-    $('#checkBalance').click(function() {
-      console.log("CHECK BALANCE");
-
-      contract.methods.balanceOf(userAccount).call({'from': userAccount}, 
-        function (err, balance) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(balance);
-            $('#display').text(balance + " Tokens");
-            $('#display').show();
-          }
-        }
-      );
-    });
-
-
-    // Must be inside of "ready" block so elements have been loaded
-    $("#purchaseToken").click(function() {
-      console.log("PURCHASE")
-
-      var hostURL = "youtube.com"
-
-      // TODO: Need some way to handle price and url
-      
+    function purchase(hostURL, price) {
       contract.methods.purchaseTicket(hostURL).send({'from': userAccount, 
-        'value': web3.utils.toWei("10", 'ether')}, 
+        'value': web3.utils.toWei(str(price), 'ether')}, 
         function (err, transactionHash) { 
           if (err) {
             console.log(err, transactionHash);
@@ -175,8 +106,54 @@ function app() {
             $("#tokenPurchased").show();
           }
       });
+    }
 
+    function checkValidAccess(hostURL) {
+        contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
+          function (err, result) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(result);
+              if(result) {
+                //TODO ASK THE SERVER THE PLAY PAGE
+                console.log("showing song");
+                $("#song").show();
+              } else {
+                //ASK TEH SERVER FOR THE BUY PAGE
+                console.log("showing buy");
+                $("#buyToken").show();
+                //hide the loader UI
+              }
+            }
+          }
+        );
+    }
+
+    function checkAccess() {
+      checkValidAccess(this.id);
+    }
+
+    $("#generate_button").click(function() {
+      var price = $('input[name=price]').val();
+      var numTickets = $('input[name=numTickets]').val();
+      var name = $('input[name=name]').val();
+
+      generate(name, price, numTickets);
+    });
+
+    $("#purchase_button").click(function() {
+      var price = $('h2[name=price]').val() //grab the price from an element;
+      var hostURL = $('h2[name=hostURL]').val() //grab the hostURL from an element
+
+      purchase(hostURL, price);
     })
+
+    songs = document.getElementByClassName('song-box');
+    for (var i = 0; i < songs.length; i++) {
+      songs[i].addEventListener('click', checkAccess, false);
+    }
+
 }
 
 $(document).ready(app);

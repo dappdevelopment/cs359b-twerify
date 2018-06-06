@@ -15,7 +15,6 @@
     height:90%; /* = 100% - 2*5% padding */
     width:90%; /* = 100% - 2*5% padding */
     padding: 5%;
-    
 }
 
 .table{
@@ -89,4 +88,22 @@ a {
 .fab:hover {
    box-shadow: 0 6px 14px 0 #666;
    transform: scale(1.05);
+}
+
+.purchase_button {
+    width: 60%;
+    height: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.audio_player {
+  margin: 10px;
+}
+
+.home_button {
+    width: 30%;
+    height: 40px;
+    text-align: center;
+    margin-bottom: 10px;
 }

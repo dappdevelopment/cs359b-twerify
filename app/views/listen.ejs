@@ -11,25 +11,27 @@
        <% include metamask.ejs %>
        <div class="container" id="song" style="display:none">
       
-          <h1>Listen</h1>
-          <h2> <%= song.name%> </h2>
-          <audio controls controlsList="nodownload">
-            <source src="/uploads/<%= song.filename%>" type="audio/mpeg">
-          </audio>
+          <h1><%= song.name%></h1>
+          <div class="audio_player">
+            <audio controls controlsList="nodownload">
+              <source src="/uploads/<%= song.filename%>" type="audio/mpeg">
+            </audio>
+          </div> 
 
-          <button action="/view" method="GET">Home</button>
+          <button class="home_button" action="/view" method="GET">Home</button>
        </div>
 
        <div class="container" id="purchase" style="display:none">
       
           <h1>Purchase a ticket?</h1>
-        
-          <h2>Cost:</h2>
-          <h2 name="price" id="test1"><%= song.price %></h2>
+      
+          <h3>Song: <%= song.name %></h3>
+          <h3><%= song.price %> ETH for lifetime access!</h3>
+          <!-- <h2 name="price" id="test1"></h2> -->
           <h2 name="hostURL" style="display:none" id="test2"><%= song.filename %></h2>
 
-          <button id="purchase_button">Buy Ticket</button>
-          <button action="/view" method="GET">Nevermind</button>
+          <button class="purchase_button">Buy Ticket</button>
+          <button class="purchase_button" action="/view" method="GET">Nevermind</button>
        </div>
 
        <div class="tokenPurchased" id="tokenPurchased" style="display:none">

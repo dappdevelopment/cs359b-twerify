@@ -1,0 +1,37 @@
+<html>
+  <head>
+      <title>Create Token</title>
+      <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://dapps.stanford.edu/web3/web3-1.0.0-beta.34.min.js"></script>
+      <script src="js/bundle.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/app.css">
+      <meta charset="utf-8">
+      <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> -->
+   </head>
+   <body>
+       <div class="container">
+        <h1>Create Personal Token</h1>
+      
+        <div class="creatorInput">
+          <form id="uploadForm" action='/generate' method="POST" enctype="multipart/form-data" >
+            <input type="file" name="audiofile" required>
+            <label for="name">Song Name</label>
+            <input name="name" type="text">
+            <label for="price">Ticket Price (ETH)</label>
+            <input name="price" type="text">
+            <label for="numTickets">Total Tickets</label>
+            <input name="numTickets" type="text">
+            <!-- <button id="generateButton" class="generateButton">Create Tokens</button> -->
+            <button>Create Tickets</button>
+          </form>
+        </div>
+
+         <div class="tokenCreated" id="tokenCreated" style="display:none">
+           <h2>Tickets Minted!</h2>
+         </div>
+       </div>
+   </body>
+</html>

@@ -149,11 +149,10 @@ function app() {
       purchase(hostURL, price);
     })
 
-    songs = document.getElementByClassName('song-box');
+    songs = document.getElementsByClassName('song-box');
     for (var i = 0; i < songs.length; i++) {
       songs[i].addEventListener('click', checkAccess, false);
     }
-
 }
 
 $(document).ready(app);

@@ -1,18 +1,22 @@
 const express = require('express');
-const trackRoute = express.Router();
+//const trackRoute = express.Router();
 const multer = require('multer');
 const bodyParser = require('body-parser');
+var ejs = require('ejs')
+var path = require('path');
 
 const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-const { Readable } = require('stream');
+//const { Readable } = require('stream');
 
 
 // Create Express server and Express Router config
 const app = express();
-app.use('/tracks', trackRoute);
+//app.use('/tracks', trackRoute);
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, '/views'))
 
 // Body handler middleware
 app.use(bodyParser.urlencoded({extended: true}))
@@ -27,9 +31,20 @@ MongoClient.connect('mongodb://client:tickett0ken@ds247670.mlab.com:47670/tiktok
   });
 });
 
+var storage = multer.diskStorage({
+  destination: function(req, file, callback) {
+    callback(null, './uploads')
+  },
+  filename: function(req, file, callback) {
+    console.log(file)
+    callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+
 
 //Downloading and Streaming tracks handlers
 
+/*
 trackRoute.get('/:trackID', (req, res) => {
   try {
     var trackID = new ObjectID(req.params.trackID);
@@ -93,6 +108,22 @@ trackRoute.post('/', (req, res) => {
   });
 });
 
+*/
+
+
+
+app.get('/api/file', (req, res) => {
+  res.render('index')
+});
+
+app.post('/api/file', function(req, res) {
+  var upload = multer({
+    storage: storage
+  }).single('userFile')
+  upload(req, res, function(err) {
+    res.end('File is uploaded')
+  })
+})
 
 
 //main web app handlers 
@@ -112,8 +143,8 @@ app.get('/view', (req, res) => {
 app.post('/upload', (req, res) => {
 	console.log('hit the upload request')
 })
-*/
 
-app.listen(3000, function() {
+/*
+app.listen(3000, function() { //set this to be based on environemnt
   console.log('listening on 3000')
-});
+});*/

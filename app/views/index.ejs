@@ -13,27 +13,23 @@
 	<div id="song-list">
 		<% for (var i=0; i < songs.length; i++) { %>
 	    	<div class="song-box" id="<%= songs[i].filename%>" >
-	    		<div class="content">
-	    			<div class="table">
-	    				<div class="table-cell">
-	    					<ul>
-		    					<li><%= songs[i].name %></li>
-								<li><%= songs[i].price %></li>
-								<li><%= songs[i].numTickets %></li>
-	    					</ul>
-	    					<form action="/t/<%= songs[i].filename%>">
-    							<input type="submit" value="Listen" />
-							</form>
-	    				</div>
+	    		<a href="/t/<%= songs[i].filename%>">
+		    		<div class="content">
+		    			<div class="table">
+		    				<div class="table-cell">
+			    				<h2><%= songs[i].name %></h2>
+								<div><%= songs[i].price %> ETH</div>
+								<div><%= songs[i].numTickets %> Tickets Left</div>
+		    				</div>
+						</div>
 					</div>
-				</div>
-				
+				</a>
 			</div>
 		<% } %>
 	</div>
 	<div id="floating-action-button">
-		<form action="/generate">
-	    	<input type="submit" value="Upload Song" />
+		<form action="/generate" method="get">
+	    	<button type="submit" class="fab">+</button>
 		</form>
 	</div>
 </body>

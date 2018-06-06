@@ -73,7 +73,6 @@ contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
     if (hostURLToNumLeft[_hostURL] > 0) {
       address _creator = hostURLToCreator[_hostURL];
       uint256 _price = hostURLToPrice[_hostURL];
-      require(msg.value >= _price);
 
       Ticket memory _ticket = Ticket({creator: _creator, hostURL: _hostURL, price: _price});
       uint256 _ticketId = tickets.push(_ticket) - 1;

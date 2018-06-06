@@ -64,9 +64,10 @@ app.post('/generate', function(req, res) {
     ticketObj.filename = req.file.filename;
 
     console.log(ticketObj);
-    //TODO save this to DB
+    db.collection('songs').save(ticketObj);
 
-    res.redirect('/views');
+    console.log("BOOM GOT HERE")
+    res.redirect('/view');
   });
 });
 
@@ -77,13 +78,13 @@ app.get('/view', (req, res) => {
   //grab all songs available in mongo (title, status - owned/notowned/created, trackid)
   //send back json of this info
   //render a ejs that takes the json and make the ui 
-  db.collection('tickets').find().toArray(function(err, results) {
+  db.collection('songs').find().toArray(function(err, results) {
   	if (err) throw err;
   	console.log(results);
-  	res.json(results);
-  })
+  	res.render('index.ejs', {songs: results});
+  });
 
-  res.json(tickets);
+  //render the page
 })
 
 app.get('/generate', (req, res) => {

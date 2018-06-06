@@ -5,8 +5,19 @@
 	<title></title>
 </head>
 <body>
-	<form action="/generate">
-    	<input type="submit" value="Create Tickets" />
-	</form>
+	<div id="song-list">
+		<% for (var i=0; i < songs.length; i++) { %>
+			<div class="song-box" id="<%= songs[i].filename%>" >
+				<div><%= songs[i].name %></div>
+				<div><%= songs[i].price %></div>
+				<div><%= songs[i].numTickets %></div>
+			</div>
+		<% } %>
+	</div>
+	<div id="floating-action-button">
+		<form action="/generate">
+	    	<input type="submit" value="Upload Song" />
+		</form>
+	</div>
 </body>
 </html>

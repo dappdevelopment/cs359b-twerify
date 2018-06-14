@@ -60,5 +60,11 @@ typings/
 # dotenv environment variables file
 .env
 
+# build artifacts
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
+
 build/*
 uploads/*

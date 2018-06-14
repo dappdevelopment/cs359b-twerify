@@ -13,7 +13,7 @@
 	<div id="song-list">
 		<% for (var i=0; i < songs.length; i++) { %>
 	    	<div class="song-box" id="<%= songs[i].filename%>" >
-	    		<a href="/t/<%= songs[i].filename%>">
+	    		<a href="/t/<%= songs[i].filename%>/<%= songs[i].name%>">
 		    		<div class="content">
 		    			<div class="table">
 		    				<div class="table-cell">

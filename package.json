@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "start": "lite-server",
-    "dev": "nodemon app/server.js"
+    "start": "node app/server.js",
+    "dev": "nodemon app/server.js",
+    "build-contracts": "sol-merger \"./contracts/*.sol\" ./build"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "lite-server": "^2.3.0",
     "lodash.assign": "^4.2.0",
     "nodemon": "^1.17.5",
+    "sol-merger": "^0.1.2",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },
@@ -47,6 +49,9 @@
   },
   "bugs": {
     "url": "https://github.com/dappdevelopment/cs359b-twerify/issues"
+  },
+  "engines": {
+    "node": "9.8.0"
   },
   "homepage": "https://github.com/dappdevelopment/cs359b-twerify#readme"
 }

@@ -3,6 +3,11 @@ pragma solidity ^0.4.23;
 import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
+/**
+import 'https://github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+import 'https://github.com/OpenZeppelin/openzeppelin-solidity/contracts/ownership/Ownable.sol';
+*/
+
 contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
   
 
@@ -53,35 +58,35 @@ contract TicketToken is ERC721Token("TicketToken","TIK"), Ownable {
     //return true;
 
 
-    uint256 _ticketCount = balanceOf(_viewer);
-
-    if (_ticketCount > 0) return true;
-
-    address creator = hostURLToCreator[_hostURL];
-    if (_viewer == creator) return true;
-
-    return false;
-
-    //////////////////
-
     // uint256 _ticketCount = balanceOf(_viewer);
 
-    // if (_ticketCount == 0) {
-    //   return false;
-    // } else {
-    //   address creator = hostURLToCreator[_hostURL];
-    //   if (_viewer == creator) return true;
+    // if (_ticketCount > 0) return true;
 
-    //   uint256[] _ownedTickets = ownedTokens[_viewer];
+    // address creator = hostURLToCreator[_hostURL];
+    // if (_viewer == creator) return true;
 
-    //   for (uint256 i = 0; i < _ownedTickets.length; i++) {
-    //     uint256 _ticketId = _ownedTickets[i];
-    //     Ticket memory _ticket = tickets[_ticketId];
-    //     if (compareStrings(_ticket.hostURL,_hostURL)) return true;
-    //   }
+    // return false;
 
-    //   return false;
-    // }
+    ////////////////
+
+    uint256 _ticketCount = balanceOf(_viewer);
+
+    if (_ticketCount == 0) {
+      return false;
+    } else {
+      address creator = hostURLToCreator[_hostURL];
+      if (_viewer == creator) return true;
+
+      uint256[] _ownedTickets = ownedTokens[_viewer];
+
+      for (uint256 i = 0; i < _ownedTickets.length; i++) {
+        uint256 _ticketId = _ownedTickets[i];
+        Ticket memory _ticket = tickets[_ticketId];
+        if (compareStrings(_ticket.hostURL,_hostURL)) return true;
+      }
+
+      return false;
+    }
   }
 
   function purchaseTicket(string _hostURL) public payable {

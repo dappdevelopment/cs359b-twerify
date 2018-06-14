@@ -25,8 +25,9 @@ let db;
 MongoClient.connect('mongodb://client:tickett0ken@ds247670.mlab.com:47670/tiktokclientdb', (err, client) => {
   if (err) return console.log(err);
   db = client.db('tiktokclientdb'); // whatever your database name is
-  app.listen(3000, () => { //TODO change based on environemnt prod vs. dev
-    console.log('listening on 3000');
+  var port = process.env.PORT || 3000
+  app.listen(port, () => { //TODO change based on environemnt prod vs. dev
+    console.log('listening on ' + port);
   });
 });
 

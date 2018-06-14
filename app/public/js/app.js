@@ -77,6 +77,8 @@ function app() {
         // TODO: Check for element that only exists on page
         if (window.location.href.indexOf("audiofile") > -1) {
           // Check permissions
+          console.log("HOSTURL ARGUMENT")
+          console.log(/[^/]*$/.exec(window.location.href)[0])
           checkValidAccess(/[^/]*$/.exec(window.location.href)[0]).then(function(result) {
             if (result) {
               console.log("Has access. Showing song.")
@@ -105,6 +107,7 @@ function app() {
             console.log(err);
           } else {
             //TEST THIS
+            console.log("successsssss")
             document.getElementById("uploadForm").submit();
           }
         }
@@ -124,6 +127,13 @@ function app() {
     }
 
     function checkValidAccess(hostURL) {
+      /**
+      return contract.methods.balanceOf(userAccount).call({'from': userAccount}, 
+          function (balance) {
+            console.log(balance)
+          }
+        );
+      **/
         return contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
           function (err, result) {
             if (err) {
@@ -147,18 +157,19 @@ function app() {
       generate(name, price, numTickets);
     });
 
+
     $("#purchase_button").click(function() {
 
       console.log("PURCHASINGGGGGG")
 
-      var price = $("#test1").val() //grab the price from an element;
-      var hostURL = $("#test2").val() //grab the hostURL from an element
+      var price = document.getElementById("price").textContent //grab the price from an element;
+      var hostURL = document.getElementById("hostURL").textContent //grab the hostURL from an element
 
-      console.log(price);
+      console.log(price)
       console.log(hostURL)
 
-      purchase("audiofile-1528318907703.mp3", "1");
-      //purchase(hostURL, price);
+      //purchase("audiofile-1528318907703.mp3", "1");
+      purchase(hostURL, price);
     })
 
     /*

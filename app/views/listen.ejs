@@ -22,13 +22,16 @@
        </div>
 
        <div class="container" id="purchase" style="display:none">
+       <!-- <div class="container" id="purchase"> -->
       
           <h1>Purchase a ticket?</h1>
       
           <h3>Song: <%= song.name %></h3>
           <h3><%= song.price %> ETH for lifetime access!</h3>
-          <!-- <h2 name="price" id="test1"></h2> -->
-          <h2 name="hostURL" style="display:none" id="test2"><%= song.filename %></h2>
+          <div style="display:none">
+            <div id="price"><%= song.price %></div>
+            <div id="hostURL"><%= song.name %></div>
+          </div>
 
           <button class="purchase_button" id="purchase_button">Buy Ticket</button>
           <button class="purchase_button" action="/view" method="GET">Nevermind</button>

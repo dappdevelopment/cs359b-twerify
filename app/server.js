@@ -31,7 +31,7 @@ MongoClient.connect('mongodb://client:tickett0ken@ds247670.mlab.com:47670/tiktok
 });
 
 var storage = multer.diskStorage({
-  destination: './app/uploads',
+  destination: './app/public/uploads',
   filename: function(req, file, callback) {
     console.log(file)
     callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -75,7 +75,21 @@ app.post('/generate', function(req, res) {
   });
 });
 
-//App Handlers 
+//App Handlers
+
+/* Get Homepage */
+app.get('/', (req, res) => {
+  //grab all songs available in mongo (title, status - owned/notowned/created, trackid)
+  //send back json of this info
+  //render a ejs that takes the json and make the ui 
+  db.collection('songs').find().toArray(function(err, results) {
+    if (err) throw err;
+    console.log(results);
+    res.render('index.ejs', {songs: results});
+  });
+
+  //render the page
+}) 
 
 /* Get Homepage */
 app.get('/view', (req, res) => {
@@ -96,18 +110,23 @@ app.get('/generate', (req, res) => {
 })
 
 /* Get Track */
-app.get('/t/:trackid', (req, res) => {
+app.get('/t/:trackid/:name', (req, res) => {
   //render a page with the right track to listen
   //maybe look up from 
-  var query = {
-    filename: req.params.trackid,
-  }
+  if (req.params.trackid.endsWith('.mp3')) {
+    var query = {
+      filename: req.params.trackid,
+    }
 
-  var song = db.collection("songs").findOne(query, function(err, result) {
-    if (err) throw err;
-    console.log(result);
-    res.render('listen.ejs', {song: result});
-  });
+    console.log(req.params.trackid)
+
+    var song = db.collection("songs").findOne(query, function(err, result) {
+      if (err) throw err;
+      console.log("reached database lookup")
+      console.log(result);
+      res.render('listen.ejs', {song: result});
+    });
+  }
 });
 
 // app.get('/buy/:trackid', (req, res) => {

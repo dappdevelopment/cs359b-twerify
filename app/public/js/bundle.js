@@ -78,6 +78,8 @@ function app() {
         // TODO: Check for element that only exists on page
         if (window.location.href.indexOf("audiofile") > -1) {
           // Check permissions
+          console.log("HOSTURL ARGUMENT")
+          console.log(/[^/]*$/.exec(window.location.href)[0])
           checkValidAccess(/[^/]*$/.exec(window.location.href)[0]).then(function(result) {
             if (result) {
               console.log("Has access. Showing song.")
@@ -106,6 +108,7 @@ function app() {
             console.log(err);
           } else {
             //TEST THIS
+            console.log("successsssss")
             document.getElementById("uploadForm").submit();
           }
         }
@@ -125,6 +128,13 @@ function app() {
     }
 
     function checkValidAccess(hostURL) {
+      /**
+      return contract.methods.balanceOf(userAccount).call({'from': userAccount}, 
+          function (balance) {
+            console.log(balance)
+          }
+        );
+      **/
         return contract.methods.hasValidAccess(userAccount, hostURL).call({'from': userAccount}, 
           function (err, result) {
             if (err) {
@@ -148,18 +158,19 @@ function app() {
       generate(name, price, numTickets);
     });
 
+
     $("#purchase_button").click(function() {
 
       console.log("PURCHASINGGGGGG")
 
-      var price = $("#test1").val() //grab the price from an element;
-      var hostURL = $("#test2").val() //grab the hostURL from an element
+      var price = document.getElementById("price").textContent //grab the price from an element;
+      var hostURL = document.getElementById("hostURL").textContent //grab the hostURL from an element
 
-      console.log(price);
+      console.log(price)
       console.log(hostURL)
 
-      purchase("audiofile-1528318907703.mp3", "1");
-      //purchase(hostURL, price);
+      //purchase("audiofile-1528318907703.mp3", "1");
+      purchase(hostURL, price);
     })
 
     /*
@@ -14620,30 +14631,35 @@ utils.intFromLE = intFromLE;
 
 },{"bn.js":17,"minimalistic-assert":104,"minimalistic-crypto-utils":105}],82:[function(require,module,exports){
 module.exports={
-  "_from": "elliptic@^6.0.0",
+  "_args": [
+    [
+      "elliptic@6.4.0",
+      "/Users/dhruvamin/Projects/cs359b-twerify"
+    ]
+  ],
+  "_from": "elliptic@6.4.0",
   "_id": "elliptic@6.4.0",
   "_inBundle": false,
   "_integrity": "sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=",
   "_location": "/elliptic",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "elliptic@^6.0.0",
+    "raw": "elliptic@6.4.0",
     "name": "elliptic",
     "escapedName": "elliptic",
-    "rawSpec": "^6.0.0",
+    "rawSpec": "6.4.0",
     "saveSpec": null,
-    "fetchSpec": "^6.0.0"
+    "fetchSpec": "6.4.0"
   },
   "_requiredBy": [
     "/browserify-sign",
     "/create-ecdh"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
-  "_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
-  "_spec": "elliptic@^6.0.0",
-  "_where": "/Users/dhruvamin/Projects/cs359b-twerify/node_modules/browserify-sign",
+  "_spec": "6.4.0",
+  "_where": "/Users/dhruvamin/Projects/cs359b-twerify",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -14651,7 +14667,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "bn.js": "^4.4.0",
     "brorand": "^1.0.1",
@@ -14661,7 +14676,6 @@ module.exports={
     "minimalistic-assert": "^1.0.0",
     "minimalistic-crypto-utils": "^1.0.0"
   },
-  "deprecated": false,
   "description": "EC cryptography",
   "devDependencies": {
     "brfs": "^1.4.3",
